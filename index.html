@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile Card</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="formValidation.js" defer></script>
+</head>
+<body>
+  <!-- Profile Card Section -->
+  <div class="profile-card">
+    <div class="icon-group">
+      <i class="fas fa-pen" title="Edit" onclick="toggleForm()"></i>
+    </div>
+
+    <div class="left-column">
+      <img src="../alternatePicture.png" alt="Profile Photo" class="profile-photo" />
+      <div class="name">John Doe</div>
+    </div>
+
+    <div class="right-column">
+      <div class="info-block designation"><i class="fas fa-briefcase"></i> Software Engineer</div>
+      <div class="info-block email"><i class="fas fa-envelope"></i> john.doe@example.com</div>
+      <div class="info-block location"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</div>
+      <div class="info-block bio">
+        Passionate developer with 5+ years of experience in building scalable web applications and APIs.
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Form Section -->
+  <form class="profile-form" id="editForm">
+    <div class="form-left">
+      <input
+        type="file"
+        name="photo"
+        accept="image/*"
+        id="photoInput"
+        style="display: none"
+        onchange="previewImage(event)"
+      />
+      <img
+        src="../alternatePicture.png"
+        alt="Click to upload"
+        id="profileImage"
+        class="profile-photo"
+        onclick="document.getElementById('photoInput').click();"
+      />
+      <input
+        type="text"
+        name="name"
+        placeholder="Name"
+        minlength="3"
+        required
+      />
+    </div>
+
+    <div class="form-right">
+      <input
+        type="text"
+        name="designation"
+        placeholder="Designation"
+        minlength="3"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+        minlength="8"
+        required
+      />
+      <textarea
+        name="bio"
+        placeholder="Short Bio"
+        rows="3"
+        minlength="15"
+        required
+      ></textarea>
+      <input
+        type="text"
+        name="location"
+        placeholder="Location"
+        minlength="3"
+        required
+      />
+    </div>
+
+    <!-- ✅ Bottom-left save + clear icons -->
+    <div class="bottom-left-icons">
+      <i class="fas fa-check" title="Save" onclick="saveChanges()" role="button" tabindex="0"></i>
+      <i class="fas fa-trash" title="Clear" onclick="clearForm()" role="button" tabindex="0"></i>
+    </div>
+  </form>
+</body>
+</html>

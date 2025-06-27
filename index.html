@@ -4,95 +4,73 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Profile Card</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="formValidation.js" defer></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Profile Card Section -->
-  <div class="profile-card">
+  <div class="profile-card" id="profileCard">
     <div class="icon-group">
-      <i class="fas fa-pen" title="Edit" onclick="toggleForm()"></i>
+      <img src="images/Property 1=Edit.png" style="width: 20px; height: 20px;" alt="" onclick="toggleForm()">
     </div>
 
     <div class="left-column">
-      <img src="../alternatePicture.png" alt="Profile Photo" class="profile-photo" />
-      <div class="name">John Doe</div>
+      <div class="image-wrapper">
+        <img src="images/alternatePicture.png" alt="Profile Photo" class="profile-photo" id="profileImageDisplay" style="margin-top: 40px;" />
+      </div>
+      <div class="name" style="margin-top: 20px;">Aarav Mehta</div>
     </div>
 
     <div class="right-column">
-      <div class="info-block designation"><i class="fas fa-briefcase"></i> Software Engineer</div>
-      <div class="info-block email"><i class="fas fa-envelope"></i> john.doe@example.com</div>
-      <div class="info-block location"><i class="fas fa-map-marker-alt"></i> San Francisco, CA</div>
-      <div class="info-block bio">
-        Passionate developer with 5+ years of experience in building scalable web applications and APIs.
-      </div>
+      <div class="info-block designation"><img src="images/Property 1=Role.png" style="width: 20px; height: 20px;" alt=""> Frontend Engineer</div>
+      <div class="info-block email"><img src="images/Property 1=Mail (1).png" style="width: 20px; height: 20px;" alt=""> aarav.mehta@example.com</div>
+      <div class="info-block bio"><img src="images/Property 1=user bio.png" style="width: 20px; height: 20px;" alt="">Learning frontend development with focus on HTML, CSS, and React.</div>
+      <div class="info-block location"><img src="images/Property 1=Location.png" style="width: 20px; height: 20px;" alt=""> Bangalore, India</div>
     </div>
   </div>
 
-  <!-- Edit Form Section -->
-  <form class="profile-form" id="editForm">
-    <div class="form-left">
-      <input
-        type="file"
-        name="photo"
-        accept="image/*"
-        id="photoInput"
-        style="display: none"
-        onchange="previewImage(event)"
-      />
-      <img
-        src="../alternatePicture.png"
-        alt="Click to upload"
-        id="profileImage"
-        class="profile-photo"
-        onclick="document.getElementById('photoInput').click();"
-      />
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        minlength="3"
-        required
-      />
+  <form class="profile-form" id="editForm" style="display: none;" novalidate>
+    <div class="form-content">
+        
+      <div class="form-left">
+        <div class="image-wrapper">
+          <input type="file" name="photo" accept="image/*" id="photoInput" style="display: none" onchange="previewImage(event)" />
+                <img src="images/alternatePicture.png" alt="Click to upload" id="profileImage" class="profile-photo" onclick="document.getElementById('photoInput').click();" />
+         <img src="images/Property 1=Delete.png" alt="Delete" class="delete-icon" onclick="clearImage()" />
+        </div>
+        <div class="input-group name-input-group">
+          <img src="images/Property 1=User name.png" style="width: 20px; height: 20px;" alt="">
+          <input type="text" name="name" placeholder="Name" minlength="3" required />
+        </div>
+      </div>
+
+      <div class="form-right">
+        <div class="input-group">
+          <img src="images/Property 1=Role.png" style="height: 25px; width: 25px;" alt="">
+          <input type="text" name="designation" placeholder="Designation" minlength="3" required />
+        </div>
+        <div class="input-group">
+          <img src="images/Property 1=Mail.png" style="width: 20px; height: 20px;" alt="">
+          <input type="email" name="email" placeholder="Email" minlength="8" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" required />
+        </div>
+        <div class="input-group">
+          <img src="images/Property 1=user bio.png" style="width: 20px; height: 20px; margin-top: -30px;" alt="">
+          <textarea name="bio" placeholder="Short Bio" rows="3" minlength="15" required></textarea>
+        </div>
+        <div class="input-group">
+          <img src="images/Property 1=Location.png" style="width: 20px; height: 20px;" alt="">
+          <input type="text" name="location" placeholder="Location" minlength="3" required />
+        </div>
+      </div>
     </div>
 
-    <div class="form-right">
-      <input
-        type="text"
-        name="designation"
-        placeholder="Designation"
-        minlength="3"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-        minlength="8"
-        required
-      />
-      <textarea
-        name="bio"
-        placeholder="Short Bio"
-        rows="3"
-        minlength="15"
-        required
-      ></textarea>
-      <input
-        type="text"
-        name="location"
-        placeholder="Location"
-        minlength="3"
-        required
-      />
-    </div>
-
-    <!-- ✅ Bottom-left save + clear icons -->
-    <div class="bottom-left-icons">
-      <i class="fas fa-check" title="Save" onclick="saveChanges()" role="button" tabindex="0"></i>
-      <i class="fas fa-trash" title="Clear" onclick="clearForm()" role="button" tabindex="0"></i>
+    <div class="top-right-icon" id="saveIcon" style="display: none;">
+      <i class="fas fa-check" title="Save" onclick="saveChanges()"></i>
     </div>
   </form>
 </body>
